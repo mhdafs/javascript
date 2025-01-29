@@ -3,29 +3,231 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document Object Model</title>
+    <title>DOM Manipulation</title>
     <script src="./dom.js" defer></script>
+    <link rel="stylesheet" href="./dom.css" />
   </head>
   <body>
-    <p id="paragraph">Old Text</p>
-    <button onclick="updateText()">Update Text</button>
-    <hr />
-    <h1 id="heading">Style Me</h1>
-    <button onclick="styleHeading()">Style</button>
-    <hr />
-    <button id="clickMeBtn">Click Me</button>
-    <hr />
-    <div id="toRemove">This will be removed</div>
-    <button onclick="remove()">Remove</button>
-    <hr />
-    <div id="parentDiv">
-      <p id="oldElement">Small Text</p>
-      <button onclick="replaceText()">Replace</button>
-    </div>
-    <hr />
-    <div>
-      <p id="child">I am the child element.</p>
-      <button onclick="changeBg()">Change BG of Parent</button>
+    <div class="container">
+      <h1>DOM Manipulation</h1>
+      <hr />
+      <!--? Selecting Elements -->
+      <section>
+        <h2>Selecting Elements</h2>
+        <h2>1. <code>getElementById()</code></h2>
+        <p id="demoText">This is a sample text element.</p>
+        <button onclick="showElementText()">Click to show element text</button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Selecting element by id
+              const element = document.getElementById("demoText");
+              console.log(element.innerText);
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="output">Click the button to see the output here.</p>
+
+        <hr />
+
+        <h2>2. <code>getElementsByClassName()</code></h2>
+        <p class="sampleClass">This is a sample text with class.</p>
+        <button onclick="showElementTextByClass()">
+          Click to show element text by class
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Selecting element by class name
+              const elements = document.getElementsByClassName("sampleClass");
+              console.log(elements[0].innerText);
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputClass">Click the button to see the output here.</p>
+
+        <hr />
+
+        <h2>3. <code>getElementsByTagName()</code></h2>
+        <p>This is a paragraph.</p>
+        <button onclick="showElementTextByTag()">
+          Click to show element text by tag
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Selecting element by tag name
+              const elements = document.getElementsByTagName("p");
+              console.log(elements[0].innerText);
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputTag">Click the button to see the output here.</p>
+
+        <hr />
+
+        <h2>4. <code>querySelector()</code></h2>
+        <p class="selectorExample">
+          This is a sample paragraph with class selector.
+        </p>
+        <button onclick="showElementTextBySelector()">
+          Click to show element text by selector
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Selecting element by selector
+              const element = document.querySelector(".selectorExample");
+              console.log(element.innerText);
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputSelector">Click the button to see the output here.</p>
+
+        <hr />
+
+        <h2>5. <code>querySelectorAll()</code></h2>
+        <p class="multiClass">Item 1</p>
+        <p class="multiClass">Item 2</p>
+        <button onclick="showAllElementsText()">
+          Click to show all elements text
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Selecting all elements by class name
+              const elements = document.querySelectorAll(".multiClass");
+              elements.forEach(el => console.log(el.innerText));
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputAll">Click the button to see the output here.</p>
+
+        <hr />
+      </section>
+      <hr />
+
+      <!--? Creating and Adding Elements -->
+      <section>
+        <h2>Creating and Adding Elements</h2>
+
+        <h2>6. <code>createElement()</code></h2>
+        <button onclick="createNewElement()">
+          Click to create a new element
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Creating a new element
+              const newDiv = document.createElement("div");
+              newDiv.innerText = "Hello, World!";
+              document.body.appendChild(newDiv);
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputCreate">Click the button to create a new element.</p>
+
+        <hr />
+
+        <h2>7. <code>appendChild()</code></h2>
+        <div id="parent">
+          <p>Existing parent element.</p>
+        </div>
+        <button onclick="appendChildElement()">
+          Click to append a new child
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Appending a new child element to the parent
+              const parent = document.getElementById("parent");
+              const child = document.createElement("p");
+              child.innerText = "New Child";
+              parent.appendChild(child);
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputAppend">Click the button to append a new child element.</p>
+
+        <hr />
+
+        <h2>8. <code>insertBefore()</code></h2>
+        <div id="parentInsert">
+          <p id="referenceChild">Reference Child Element</p>
+        </div>
+        <button onclick="insertBeforeElement()">
+          Click to insert before the reference child
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Inserting a new element before a reference child
+              const parent = document.getElementById("parentInsert");
+              const newChild = document.createElement("div");
+              newChild.innerText = "Inserted Before";
+              const reference = document.getElementById("referenceChild");
+              parent.insertBefore(newChild, reference);
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputInsert">
+          Click the button to insert a new element before the reference child.
+        </p>
+
+        <hr />
+
+        <h2>9. <code>innerHTML</code></h2>
+        <p id="content">This is a simple paragraph.</p>
+        <button onclick="changeInnerHTML()">Click to change inner HTML</button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Changing the innerHTML of an element
+              document.getElementById("content").innerHTML = "&lt;b&gt;Updated Content&lt;/b&gt;";
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputInnerHTML">Click the button to change the inner HTML.</p>
+
+        <hr />
+
+        <h2>10. <code>outerHTML</code></h2>
+        <p id="replaceContent">This is a paragraph to be replaced.</p>
+        <button onclick="replaceWithOuterHTML()">
+          Click to replace with outer HTML
+        </button>
+        <h3>Code Example:</h3>
+        <div class="code-container">
+          <pre>
+            <code>
+              // Replacing the element with new outerHTML
+              document.getElementById("replaceContent").outerHTML = "&lt;div&gt;Replaced Element&lt;/div&gt;";
+            </code>
+          </pre>
+        </div>
+        <h3>What happens when you click the button:</h3>
+        <p id="outputOuterHTML">
+          Click the button to replace the element with outer HTML.
+        </p>
+      </section>
     </div>
   </body>
 </html>
